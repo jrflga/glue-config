@@ -38,4 +38,6 @@ require('dotenv').config();
 console.log(process.env.PORT)
 ```
 
+![Demo](https://github.com/jrflga/glue-config/blob/main/demo.gif?raw=true)
+
 And that's it.
