@@ -1,7 +1,8 @@
 const fs = require('fs')
 const crypto = require('crypto')
+const path = require('path')
 
-const configs = require('./glue.config.js')
+const configs = require(path.resolve(process.cwd(), 'glue.config.js'))
 const package = require('./package.json')
 
 const hashPackageName = crypto.createHash('md5').update(package.name).digest('hex');
@@ -9,7 +10,7 @@ const hashPackageName = crypto.createHash('md5').update(package.name).digest('he
 const exitHandler = () => {
     configs.forEach(config => {
         const { filename } = config
-        fs.unlinkSync(`${__dirname}/${filename}`)
+        if (fs.existsSync(path)) fs.unlinkSync(`${process.cwd()}/${filename}`)
     })
 }
 
@@ -25,7 +26,6 @@ module.exports = () => {
 
         fs.mkdirSync(`/tmp/${hashPackageName}`, { recursive: true })
         fs.writeFileSync(`/tmp/${hashPackageName}/${filename}`, content)
-        fs.symlinkSync(`/tmp/${hashPackageName}/${filename}`, `${__dirname}/${id}`)
-
+        fs.symlinkSync(`/tmp/${hashPackageName}/${filename}`, `${process.cwd()}/${filename}`)
     })
 }
