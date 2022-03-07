@@ -10,7 +10,7 @@ const hashPackageName = crypto.createHash('md5').update(package.name).digest('he
 const exitHandler = () => {
     configs.forEach(config => {
         const { filename } = config
-        if (fs.existsSync(path)) fs.unlinkSync(`${process.cwd()}/${filename}`)
+        if (fs.existsSync(`${process.cwd()}/${filename}`)) fs.unlinkSync(`${process.cwd()}/${filename}`)
     })
 }
 
